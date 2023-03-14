@@ -7,11 +7,12 @@ import jakarta.persistence.*;
 public class Customer extends User {
 
     // constructors
-    public Customer(int id, String username, String password) {
+    public Customer(long id, String username, String password) {
         super(id, username, password);
     }
 
     public Customer() {
+        super();
     }
 
 

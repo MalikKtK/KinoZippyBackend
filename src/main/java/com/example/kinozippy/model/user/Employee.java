@@ -11,12 +11,13 @@ public class Employee extends User {
     private Role role;
 
     // constructors
-    public Employee(int id, String username, String password, Role role) {
+    public Employee(long id, String username, String password, Role role) {
         super(id, username, password);
         this.role = role;
     }
 
     public Employee() {
+        super();
     }
 
     // getter setter

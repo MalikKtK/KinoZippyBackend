@@ -10,10 +10,11 @@ public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String password;
+    private long id;
     @NonNull
     private String username;
+    @NonNull
+    private String password;
 
     @Override
     public String toString() {
@@ -21,21 +22,21 @@ public abstract class User {
     }
 
     // constructors
-    public User(int id, String password, @NonNull String username) {
+    public User(long id, @NonNull String username, @NonNull String password) {
         this.id = id;
-        this.password = password;
         this.username = username;
+        this.password = password;
     }
 
     public User() {
     }
 
     // getter setter
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
