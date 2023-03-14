@@ -1,27 +1,42 @@
 package com.example.kinozippy.config;
 
-import com.example.kinozippy.model.Theater;
-import com.example.kinozippy.model.enums.Role;
-import com.example.kinozippy.model.user.Customer;
-import com.example.kinozippy.model.user.Employee;
-import com.example.kinozippy.repository.CustomerRepository;
-import com.example.kinozippy.repository.EmployeeRepository;
-import com.example.kinozippy.repository.TheaterRepository;
+import com.example.kinozippy.model.*;
+import com.example.kinozippy.model.enums.*;
+import com.example.kinozippy.model.user.*;
+import com.example.kinozippy.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Component
 public class InitData implements CommandLineRunner {
-
+    // ### run tests ###
     private final boolean runTests = true;
+    // ### repositories ###
+    private final TheaterRepository theaterRepository;
+    private final EmployeeRepository employeeRepository;
+    private final CustomerRepository customerRepository;
+    private final MovieRepository movieRepository;
+    private final ShowTimeRepository showTimeRepository;
 
     @Autowired
-    TheaterRepository theaterRepository;
-    @Autowired
-    EmployeeRepository employeeRepository;
-    @Autowired
-    CustomerRepository customerRepository;
+    public InitData(TheaterRepository theaterRepository,
+                    EmployeeRepository employeeRepository,
+                    CustomerRepository customerRepository,
+                    MovieRepository movieRepository,
+                    ShowTimeRepository showTimeRepository) {
+        this.theaterRepository = theaterRepository;
+        this.employeeRepository = employeeRepository;
+        this.customerRepository = customerRepository;
+        this.movieRepository = movieRepository;
+        this.showTimeRepository = showTimeRepository;
+    }
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -30,6 +45,8 @@ public class InitData implements CommandLineRunner {
         theater();
         employee();
         customer();
+        movie();
+        showTime();
     }
 
     public void theater() {
@@ -48,6 +65,27 @@ public class InitData implements CommandLineRunner {
         customerRepository.save(new Customer(1, "c1", "123"));
         customerRepository.save(new Customer(2, "c2", "123"));
         customerRepository.save(new Customer(3, "c3", "123"));
+    }
+
+    public void movie() {
+        movieRepository.save(new Movie(1, "snask til du plasker", Category.ACTION, AgeLimit.ADULTS_ONLY));
+        movieRepository.save(new Movie(2, "the one eyed monster", Category.COMEDY, AgeLimit.PARENTAL_GUIDANCE_SUGGESTED));
+        movieRepository.save(new Movie(3, Category.DRAMA.toString(), Category.DRAMA, AgeLimit.RESTRICTED));
+    }
+
+    public void showTime() {
+        ShowTime showTime = new ShowTime(1, 1, 1, LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
+
+        // tickets
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket(1, showTime, 1, 1, 120, false));
+        tickets.add(new Ticket(2, showTime, 2, 1, 120, false));
+        tickets.add(new Ticket(3, showTime, 3, 1, 120, false));
+
+        showTime.setTickets(tickets);
+
+        showTimeRepository.save(showTime);
+        System.out.println("showTime: " + showTime);
     }
 
 }
