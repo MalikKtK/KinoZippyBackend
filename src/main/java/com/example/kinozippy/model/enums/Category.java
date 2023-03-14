@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Category {
-
     ACTION(1),
     ADVENTURE(2),
     ANIMATION(3),
