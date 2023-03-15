@@ -32,8 +32,9 @@ public class MovieService {
     return movieRepository.findById(id);
   }
 
-  public ResponseEntity<Movie> putMovie(Movie movie) {
-    if (doesMovieExist(movie)) {
+  public ResponseEntity<Movie> putMovie(Movie movie, long movieId) {
+    if (doesMovieExist(movieId)) {
+      movie.setId(movieId);
       Movie updatedMovie = movieRepository.save(movie);
       return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
     }
