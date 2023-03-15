@@ -10,9 +10,12 @@ import java.util.List;
 
 @RestController
 public class EmployeeController {
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     // handles GET requests to /employees and returns a list of all Employee entities in the repository.
     @GetMapping("/employees")

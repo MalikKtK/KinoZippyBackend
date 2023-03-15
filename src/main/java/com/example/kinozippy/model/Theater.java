@@ -13,11 +13,11 @@ public class Theater {
     private int seatNumber;
 
     // constructors
-    public Theater(long id, String name, int seatRow, int seatNumber) {
+    public Theater(long id, String name, int seatRows, int seatNumbers) {
         this.id = id;
         this.name = name;
-        this.seatRow = seatRow;
-        this.seatNumber = seatNumber;
+        this.seatRow = seatRows;
+        this.seatNumber = seatNumbers;
     }
 
     public Theater() {
