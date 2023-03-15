@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(value = "*")
 public class TicketController {
     private final TicketRepository ticketRepository;
 
