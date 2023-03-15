@@ -68,9 +68,9 @@ public class InitData implements CommandLineRunner {
     }
 
     public void movie() {
-        movieRepository.save(new Movie(1, "snask til du plasker", Category.ACTION, AgeLimit.ADULTS_ONLY));
-        movieRepository.save(new Movie(2, "the one eyed monster", Category.COMEDY, AgeLimit.PARENTAL_GUIDANCE_SUGGESTED));
-        movieRepository.save(new Movie(3, Category.DRAMA.toString(), Category.DRAMA, AgeLimit.RESTRICTED));
+        movieRepository.save(new Movie("snask til du plasker", AgeLimit.ADULTS_ONLY, Category.ACTION, 120));
+        movieRepository.save(new Movie("the one eyed monster", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110));
+        movieRepository.save(new Movie("the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130));
     }
 
     public void showTime() {

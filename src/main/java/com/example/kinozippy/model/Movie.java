@@ -2,34 +2,60 @@ package com.example.kinozippy.model;
 
 import com.example.kinozippy.model.enums.AgeLimit;
 import com.example.kinozippy.model.enums.Category;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
 @Entity
+@Table(name = "movies")
 public class Movie {
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_id")
+    @JsonProperty("id")
+    private Long id;
+
+    @Column(name = "title")
     @NonNull
+    @JsonProperty("title")
     private String title;
+
+    @Column(name = "age_limit")
     @NonNull
-    private Category category;
-    @NonNull
+    @JsonProperty("ageLimit")
+    @Enumerated(EnumType.STRING)
     private AgeLimit ageLimit;
 
-    // constructors
-    public Movie(long id, String title, Category category, AgeLimit ageLimit) {
+    @Column(name = "category")
+    @NonNull
+    @JsonProperty("category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    @Column(name = "length_in_minutes")
+    @NonNull
+    @JsonProperty("length")
+    private int lengthInMinutes;
+
+    public Movie(long id, String title, AgeLimit ageLimit, Category category, int lengthInMinutes) {
         this.id = id;
         this.title = title;
-        this.category = category;
         this.ageLimit = ageLimit;
+        this.category = category;
+        this.lengthInMinutes = lengthInMinutes;
+    }
+
+    public Movie(String title, AgeLimit ageLimit, Category category, int lengthInMinutes) {
+        this.title = title;
+        this.ageLimit = ageLimit;
+        this.category = category;
+        this.lengthInMinutes = lengthInMinutes;
     }
 
     public Movie() {
     }
 
-    // getters setters
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -45,6 +71,14 @@ public class Movie {
         this.title = title;
     }
 
+    public AgeLimit getAgeLimit() {
+        return ageLimit;
+    }
+
+    public void setAgeLimit(AgeLimit ageLimit) {
+        this.ageLimit = ageLimit;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -53,11 +87,11 @@ public class Movie {
         this.category = category;
     }
 
-    public AgeLimit getAgeLimit() {
-        return ageLimit;
+    public int getLengthInMinutes() {
+        return lengthInMinutes;
     }
 
-    public void setAgeLimit(AgeLimit ageLimit) {
-        this.ageLimit = ageLimit;
+    public void setLengthInMinutes(int lengthInMinutes) {
+        this.lengthInMinutes = lengthInMinutes;
     }
 }
