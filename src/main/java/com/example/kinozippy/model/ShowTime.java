@@ -1,10 +1,7 @@
 package com.example.kinozippy.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Entity
 public class ShowTime {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long theaterId;
     private long movieId;
