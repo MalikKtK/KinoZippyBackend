@@ -52,12 +52,11 @@ public abstract class User {
         this.password = password;
     }
 
-    @NonNull
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(@NonNull String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 }
