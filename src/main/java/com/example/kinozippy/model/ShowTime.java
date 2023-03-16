@@ -21,6 +21,7 @@ public class ShowTime {
     @OneToMany(mappedBy = "showTime", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
+
     // extra
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);

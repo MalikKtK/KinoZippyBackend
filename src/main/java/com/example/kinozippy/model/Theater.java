@@ -2,6 +2,8 @@ package com.example.kinozippy.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Theater {
@@ -23,6 +25,7 @@ public class Theater {
     public Theater() {
 
     }
+
 
     // getters setters
     public Long getId() {
