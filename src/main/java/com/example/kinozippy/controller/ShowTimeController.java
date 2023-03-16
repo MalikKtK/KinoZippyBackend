@@ -46,8 +46,6 @@ public class ShowTimeController {
         ShowTime ShowTime = showTimeRepository.findById(ShowTimeId)
                 .orElse(null);
 
-        ShowTime.setTheaterId(ShowTimeDetails.getTheaterId());
-        ShowTime.setMovieId(ShowTimeDetails.getMovieId());
         ShowTime.setStartTime(ShowTimeDetails.getStartTime());
         ShowTime.setEndTime(ShowTimeDetails.getEndTime());
         ShowTime.setTickets(ShowTimeDetails.getTickets());

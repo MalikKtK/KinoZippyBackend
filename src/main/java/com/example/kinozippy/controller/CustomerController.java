@@ -1,8 +1,11 @@
 package com.example.kinozippy.controller;
 
 import com.example.kinozippy.model.user.Customer;
+import com.example.kinozippy.model.user.Employee;
 import com.example.kinozippy.repository.CustomerRepository;
+import com.example.kinozippy.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +14,11 @@ import java.util.List;
 @RestController
 @CrossOrigin(value = "*")
 public class CustomerController {
-    private final CustomerRepository customerRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerRepository customerRepository) {
@@ -26,10 +33,10 @@ public class CustomerController {
 
     // handles POST requests to /customer and adds a new customer entity to the repository.
     @PostMapping("/customer")
-    public Customer addCustomer(@RequestBody Customer customer) {
-        return customerRepository.save(customer);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer) {
+        return customerService.postCustomer(customer);
     }
-
     // handles GET requests to /customer/{id} and returns the customer entity with the specified ID.
     @GetMapping("/customer/{id}")
     public Customer getCustomerById(@PathVariable(value = "id") long customerId) {

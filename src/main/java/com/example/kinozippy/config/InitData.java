@@ -50,8 +50,8 @@ public class InitData implements CommandLineRunner {
     }
 
     public void theater() {
-        theaterRepository.save(new Theater(1, "small theater", 20, 12));
-        theaterRepository.save(new Theater(2, "big theater", 25, 16));
+        theaterRepository.save(new Theater(1, "small theater", 20, 12, null));
+        theaterRepository.save(new Theater(2, "big theater", 25, 16, null));
     }
 
     public void employee() {
@@ -68,13 +68,13 @@ public class InitData implements CommandLineRunner {
     }
 
     public void movie() {
-        movieRepository.save(new Movie("snask til du plasker", AgeLimit.ADULTS_ONLY, Category.ACTION, 120));
-        movieRepository.save(new Movie("the one eyed monster", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110));
-        movieRepository.save(new Movie("the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130));
+        movieRepository.save(new Movie(1,"snask til du plasker", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null));
+        movieRepository.save(new Movie(2, "the one eyed monster", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110, null));
+        movieRepository.save(new Movie(3,"the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130, null));
     }
 
     public void showTime() {
-        ShowTime showTime = new ShowTime(1, 1, 1, LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
+        ShowTime showTime = new ShowTime(1, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
 
         // tickets
         List<Ticket> tickets = new ArrayList<>();

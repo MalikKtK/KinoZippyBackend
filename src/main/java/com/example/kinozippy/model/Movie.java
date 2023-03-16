@@ -2,9 +2,13 @@ package com.example.kinozippy.model;
 
 import com.example.kinozippy.model.enums.AgeLimit;
 import com.example.kinozippy.model.enums.Category;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
+
+import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -37,12 +41,18 @@ public class Movie {
     @JsonProperty("length")
     private int lengthInMinutes;
 
-    public Movie(long id, String title, AgeLimit ageLimit, Category category, int lengthInMinutes) {
+    @OneToMany(mappedBy = "movie")
+    @JsonBackReference
+    private List<ShowTime> showTimes;
+
+    // ### constructors ###
+    public Movie(long id, String title, AgeLimit ageLimit, Category category, int lengthInMinutes, List<ShowTime> showTimes) {
         this.id = id;
         this.title = title;
         this.ageLimit = ageLimit;
         this.category = category;
         this.lengthInMinutes = lengthInMinutes;
+        this.showTimes = showTimes;
     }
 
     public Movie(String title, AgeLimit ageLimit, Category category, int lengthInMinutes) {
@@ -55,6 +65,7 @@ public class Movie {
     public Movie() {
     }
 
+    // ### getters setters ###
     public Long getId() {
         return id;
     }
@@ -93,5 +104,13 @@ public class Movie {
 
     public void setLengthInMinutes(int lengthInMinutes) {
         this.lengthInMinutes = lengthInMinutes;
+    }
+
+    public List<ShowTime> getShowTimes() {
+        return showTimes;
+    }
+
+    public void setShowTimes(List<ShowTime> showTimes) {
+        this.showTimes = showTimes;
     }
 }

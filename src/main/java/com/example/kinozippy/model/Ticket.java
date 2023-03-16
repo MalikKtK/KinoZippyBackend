@@ -1,6 +1,7 @@
 package com.example.kinozippy.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,8 +14,6 @@ public class Ticket {
     @JoinColumn(name = "showtime_id", nullable = false)
     @JsonBackReference
     private ShowTime showTime;
-    @Column(name = "showtime_id", insertable = false, updatable = false) // false because it's populated by @ManyToOne
-    private Long showTimeId;
     private int seatRow;
     private int seatNumber;
     private double price;
@@ -48,14 +47,6 @@ public class Ticket {
 
     public void setShowTime(ShowTime showTime) {
         this.showTime = showTime;
-    }
-
-    public Long getShowTimeId() {
-        return showTimeId;
-    }
-
-    public void setShowTimeId(Long showTimeId) {
-        this.showTimeId = showTimeId;
     }
 
     public int getSeatRow() {

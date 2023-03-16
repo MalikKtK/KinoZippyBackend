@@ -1,5 +1,6 @@
 package com.example.kinozippy.model.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
@@ -12,8 +13,10 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NonNull
+    @JsonProperty("username")
     private String username;
     @NonNull
+    @JsonProperty("password")
     private String password;
 
     @Override

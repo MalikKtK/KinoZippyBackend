@@ -12,12 +12,23 @@ public class ShowTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long theaterId;
-    private long movieId;
+
+    // Many showTimes relate to one theater
+    @ManyToOne
+    @JoinColumn(name = "theater_id", referencedColumnName = "id")
+    private Theater theater;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+    private Movie movie;
+
     private LocalDateTime startTime;
+
     private LocalDateTime endTime;
+
     @OneToMany(mappedBy = "showTime", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
+
 
     // extra
     public void addTicket(Ticket ticket) {
@@ -29,10 +40,10 @@ public class ShowTime {
     }
 
     // ### constructors ###
-    public ShowTime(long id, long theaterId, long movieId, LocalDateTime startTime, LocalDateTime endTime, List<Ticket> tickets) {
+    public ShowTime(long id, Theater theater, Movie movie, LocalDateTime startTime, LocalDateTime endTime, List<Ticket> tickets) {
         this.id = id;
-        this.theaterId = theaterId;
-        this.movieId = movieId;
+        this.theater = theater;
+        this.movie = movie;
         this.startTime = startTime;
         this.endTime = endTime;
         this.tickets = tickets;
@@ -50,20 +61,20 @@ public class ShowTime {
         this.id = id;
     }
 
-    public long getTheaterId() {
-        return theaterId;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTheaterId(long theaterId) {
-        this.theaterId = theaterId;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
-    public long getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(long movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public LocalDateTime getStartTime() {
