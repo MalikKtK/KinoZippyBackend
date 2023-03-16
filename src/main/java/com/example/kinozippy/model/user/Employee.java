@@ -1,6 +1,7 @@
 package com.example.kinozippy.model.user;
 
 import com.example.kinozippy.model.enums.Role;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
@@ -8,6 +9,10 @@ import org.springframework.lang.NonNull;
 @DiscriminatorValue("employee")
 public class Employee extends User {
 
+
+    @Column(name = "role")
+    @NonNull
+    @JsonProperty("role")
     private Role role;
 
     // constructors
@@ -20,14 +25,11 @@ public class Employee extends User {
         super();
     }
 
-    // getter setter
-    @NonNull
+    public void setRole(Role role) {
+        this.role = role;
+    }
     public Role getRole() {
         return role;
-    }
-
-    public void setRole(@NonNull Role role) {
-        this.role = role;
     }
 
 }

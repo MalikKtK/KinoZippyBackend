@@ -4,21 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Role {
-    MANAGER("Admin"),            // create user accounts define their roles
-    SHOP_ASSISTANT ("Staff"),     //
-    TICKET_INSPECTOR("Staff"),   //
-    OPERATOR("Staff");           //
+    MANAGER,            // create user accounts define their roles
+    SHOP_ASSISTANT,     //
+    TICKET_INSPECTOR,   //
+    OPERATOR;           //
 
-    private final String startRole;
-    // Constructor
-    Role (String startRole) {
-        this.startRole = startRole;
-    }
-
-    // Getter
-    public String getStartRole() {
-        return startRole;
-    }
+    // Get
     public static List<Role> getAllRoles() {
         return Arrays.asList(com.example.kinozippy.model.enums.Role.class.getEnumConstants());
     }

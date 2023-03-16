@@ -1,8 +1,13 @@
 package com.example.kinozippy.controller;
 
+import com.example.kinozippy.model.enums.Role;
 import com.example.kinozippy.model.user.Employee;
+import com.example.kinozippy.model.user.User;
 import com.example.kinozippy.repository.EmployeeRepository;
+import com.example.kinozippy.service.EmployeeService;
+import com.example.kinozippy.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +16,17 @@ import java.util.List;
 @RestController
 @CrossOrigin(value = "*")
 public class EmployeeController {
-    private final EmployeeRepository employeeRepository;
-
     @Autowired
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    EmployeeService employeeService;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     // handles GET requests to /employees and returns a list of all Employee entities in the repository.
+    @GetMapping("/employee/roles")
+    public List<Role> getRoles() {
+        return Role.getAllRoles();
+    }
+
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
@@ -26,8 +34,9 @@ public class EmployeeController {
 
     // handles POST requests to /employee and adds a new Employee entity to the repository.
     @PostMapping("/employee")
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeRepository.save(employee);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Employee> postEmployee(@RequestBody Employee employee) {
+        return employeeService.postEmployee(employee);
     }
 
     // handles GET requests to /employee/{id} and returns the Employee entity with the specified ID.
