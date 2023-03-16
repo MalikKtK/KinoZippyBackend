@@ -11,7 +11,6 @@ public class Employee extends User {
 
 
     @Column(name = "role")
-    @NonNull
     @JsonProperty("role")
     private Role role;
 

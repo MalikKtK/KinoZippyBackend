@@ -4,6 +4,7 @@ import com.example.kinozippy.model.user.Customer;
 import com.example.kinozippy.model.user.Employee;
 import com.example.kinozippy.model.user.User;
 import com.example.kinozippy.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class CustomerService {
+    @Autowired
     CustomerRepository customerRepository;
     public ResponseEntity<Customer> postCustomer(Customer customer) {
         if (doesCustomerExist(customer)) {
