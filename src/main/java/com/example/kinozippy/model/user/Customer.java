@@ -1,6 +1,9 @@
 package com.example.kinozippy.model.user;
 
+import com.example.kinozippy.model.enums.Role;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import org.springframework.lang.NonNull;
 
 @Entity
 @DiscriminatorValue("customer")

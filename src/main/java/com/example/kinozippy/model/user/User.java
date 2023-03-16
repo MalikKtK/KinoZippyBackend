@@ -11,8 +11,7 @@ public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NonNull
-    @JsonProperty("user_id")
+    @JsonProperty("id")
     private long id;
     @NonNull
     @JsonProperty("username")
