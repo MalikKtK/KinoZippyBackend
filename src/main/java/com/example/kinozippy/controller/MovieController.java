@@ -45,6 +45,10 @@ public class MovieController {
     public Movie getMovie(@PathVariable long id) {
         return movieService.getMovie(id).orElseThrow( ()-> new ResourceNotFoundException("Movie with id: " + id));
     }
+    @PutMapping("/movie/{id}")
+    public ResponseEntity<Movie> putMovie(@PathVariable long id, @RequestBody Movie movie) {
+        return  movieService.putMovie(movie, id);
+    }
 
 
 

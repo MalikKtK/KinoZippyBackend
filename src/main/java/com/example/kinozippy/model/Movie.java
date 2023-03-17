@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
-import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -45,14 +44,21 @@ public class Movie {
     @JsonBackReference
     private List<ShowTime> showTimes;
 
+
+    @Column(name = "rating", length = 10)
+    @JsonProperty("rating")
+    @NonNull
+    private int rating;
+
     // ### constructors ###
-    public Movie(long id, String title, AgeLimit ageLimit, Category category, int lengthInMinutes, List<ShowTime> showTimes) {
+    public Movie(long id, String title, AgeLimit ageLimit, Category category, int lengthInMinutes, List<ShowTime> showTimes, int rating) {
         this.id = id;
         this.title = title;
         this.ageLimit = ageLimit;
         this.category = category;
         this.lengthInMinutes = lengthInMinutes;
         this.showTimes = showTimes;
+        this.rating = rating;
     }
 
     public Movie(String title, AgeLimit ageLimit, Category category, int lengthInMinutes) {
@@ -112,5 +118,12 @@ public class Movie {
 
     public void setShowTimes(List<ShowTime> showTimes) {
         this.showTimes = showTimes;
+    }
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
