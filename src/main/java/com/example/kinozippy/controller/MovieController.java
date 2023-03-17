@@ -50,6 +50,11 @@ public class MovieController {
         return  movieService.putMovie(movie, id);
     }
 
+    @DeleteMapping("/movie/{id}")
+    public ResponseEntity<Movie> deleteMovie(@PathVariable long id) {
+        return movieService.deleteMovie(id);
+    }
+
 
 
 }
