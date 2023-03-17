@@ -2,6 +2,7 @@ package com.example.kinozippy.controller;
 
 import com.example.kinozippy.exception.ResourceNotFoundException;
 import com.example.kinozippy.model.Movie;
+import com.example.kinozippy.model.ShowTime;
 import com.example.kinozippy.model.enums.AgeLimit;
 import com.example.kinozippy.model.enums.Category;
 import com.example.kinozippy.repository.MovieRepository;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(value = "*")
@@ -44,6 +46,15 @@ public class MovieController {
     @GetMapping("/movie/{id}")
     public Movie getMovie(@PathVariable long id) {
         return movieService.getMovie(id).orElseThrow( ()-> new ResourceNotFoundException("Movie with id: " + id));
+    }
+
+    @GetMapping("/movie/{id}/showtimes")
+    public List<ShowTime> getMovieShowtimes(@PathVariable long id) {
+        Optional<Movie> optionalMovie = movieService.getMovie(id);
+        if (optionalMovie.isPresent()) {
+            return optionalMovie.get().getShowTimes();
+        }
+        throw new ResourceNotFoundException("ShowTimes with a Movie with id: " + id);
     }
     @PutMapping("/movie/{id}")
     public ResponseEntity<Movie> putMovie(@PathVariable long id, @RequestBody Movie movie) {
