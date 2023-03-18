@@ -1,11 +1,11 @@
 package com.example.kinozippy.controller;
 
+import com.example.kinozippy.config.SortShowTimesByDate;
 import com.example.kinozippy.exception.ResourceNotFoundException;
 import com.example.kinozippy.model.Movie;
 import com.example.kinozippy.model.ShowTime;
 import com.example.kinozippy.model.enums.AgeLimit;
 import com.example.kinozippy.model.enums.Category;
-import com.example.kinozippy.repository.MovieRepository;
 import com.example.kinozippy.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +52,9 @@ public class MovieController {
     public List<ShowTime> getMovieShowtimes(@PathVariable long id) {
         Optional<Movie> optionalMovie = movieService.getMovie(id);
         if (optionalMovie.isPresent()) {
-            return optionalMovie.get().getShowTimes();
+            List<ShowTime> movieShowTimes = optionalMovie.get().getShowTimes();
+            movieShowTimes.sort(new SortShowTimesByDate());
+            return movieShowTimes;
         }
         throw new ResourceNotFoundException("ShowTimes with a Movie with id: " + id);
     }
