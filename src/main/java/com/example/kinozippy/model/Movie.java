@@ -1,5 +1,4 @@
 package com.example.kinozippy.model;
-
 import com.example.kinozippy.model.enums.AgeLimit;
 import com.example.kinozippy.model.enums.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -12,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "movies")
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
