@@ -18,13 +18,13 @@ public class ShopController {
   ShopService shopService;
 
 
-  @PostMapping("/Shop")
+  @PostMapping("/shop")
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<Shop> postShop(@RequestBody Shop shop) {
     return shopService.postShop(shop);
   }
 
-  @GetMapping("/Shops")
+  @GetMapping("/shops")
   public List<Shop> getMovies() {
     return shopService.getShop();
   }

@@ -10,7 +10,7 @@ public class Shop {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "Shop_id")
+  @Column(name = "shop_id")
   @JsonProperty("id")
   private Long id;
 
@@ -29,8 +29,14 @@ public class Shop {
   @JsonProperty("quantity")
   private int quantity;
 
-  public Shop(Long id, @NonNull String name, int price, int quantity) {
+  public Shop(Long id, String name, int price, int quantity) {
     this.id = id;
+    this.name = name;
+    this.price = price;
+    this.quantity = quantity;
+  }
+
+  public Shop(String name, int price, int quantity) {
     this.name = name;
     this.price = price;
     this.quantity = quantity;
@@ -40,21 +46,19 @@ public class Shop {
 
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  @Id
   public Long getId() {
     return id;
   }
 
-  @NonNull
+  public void setId(Long id) {
+    this.id = id;
+  }
+
   public String getName() {
     return name;
   }
 
-  public void setName(@NonNull String name) {
+  public void setName(String name) {
     this.name = name;
   }
 
