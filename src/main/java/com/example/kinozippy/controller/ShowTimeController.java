@@ -65,4 +65,8 @@ public class ShowTimeController {
         return ResponseEntity.ok().build();
     }
 
+    // todo add method to get all showRimes for a timeRange
+
+
+
 }

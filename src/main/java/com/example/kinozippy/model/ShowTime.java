@@ -29,6 +29,8 @@ public class ShowTime {
     @OneToMany(mappedBy = "showTime", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
+    private double price;
+
 
     // extra
     public void addTicket(Ticket ticket) {
@@ -40,8 +42,11 @@ public class ShowTime {
     }
 
     // ### constructors ###
-    public ShowTime(long id, Theater theater, Movie movie, LocalDateTime startTime, LocalDateTime endTime, List<Ticket> tickets) {
+    public ShowTime(long id, double price, Theater theater, Movie movie,
+                    LocalDateTime startTime, LocalDateTime endTime,
+                    List<Ticket> tickets) {
         this.id = id;
+        this.price = price;
         this.theater = theater;
         this.movie = movie;
         this.startTime = startTime;
@@ -99,5 +104,13 @@ public class ShowTime {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

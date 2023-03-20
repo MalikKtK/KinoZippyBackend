@@ -37,6 +37,10 @@ public class TicketController {
                 .orElseThrow(null);
     }
 
+    @GetMapping("/tickets/showtime/{id}")
+    public List<Ticket> getTicketsByShowTimeId(@PathVariable(value = "id") long showTimeId) {
+        return ticketRepository.findAllByShowTimeId(showTimeId);
+    }
 
     // handles DELETE requests to /Ticket/{id} and deletes the Ticket entity with the specified ID.
     @DeleteMapping("/ticket/{id}")

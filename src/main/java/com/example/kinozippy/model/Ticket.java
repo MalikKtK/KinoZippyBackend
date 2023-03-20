@@ -1,7 +1,6 @@
 package com.example.kinozippy.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,15 +17,17 @@ public class Ticket {
     private int seatNumber;
     private double price;
     private boolean isPaid;
+    private boolean attended;
 
     // ### constructors ###
-    public Ticket(long id, ShowTime ShowTime, int seatRow, int seatNumber, double price, boolean isPaid) {
+    public Ticket(long id, ShowTime ShowTime, int seatRow, int seatNumber, double price, boolean isPaid, boolean attended) {
         this.id = id;
         this.showTime = ShowTime;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
         this.price = price;
         this.isPaid = isPaid;
+        this.attended = attended;
     }
 
     public Ticket() {
@@ -79,5 +80,13 @@ public class Ticket {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public boolean isAttended() {
+        return attended;
+    }
+
+    public void setAttended(boolean hasAttended) {
+        this.attended = hasAttended;
     }
 }

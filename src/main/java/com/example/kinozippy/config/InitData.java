@@ -68,23 +68,29 @@ public class InitData implements CommandLineRunner {
     }
 
     public void movie() {
-        movieRepository.save(new Movie(1,"snask til du plasker", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null, 1));
-        movieRepository.save(new Movie(2, "the one eyed monster", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110, null, 5));
+        movieRepository.save(new Movie(1,"peter the can man", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null, 1));
+        movieRepository.save(new Movie(2, "the big movie", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110, null, 5));
         movieRepository.save(new Movie(3,"the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130, null, 6));
     }
 
     public void showTime() {
-        ShowTime showTime = new ShowTime(1, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
+        ShowTime showTime = new ShowTime(1, 100, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
+        ShowTime showTime2 = new ShowTime(2, 110, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
+        ShowTime showTime3 = new ShowTime(3, 120, theaterRepository.getReferenceById(2L), movieRepository.getReferenceById(2L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
+        ShowTime showTime4 = new ShowTime(4, 130, theaterRepository.getReferenceById(2L), movieRepository.getReferenceById(2L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
 
         // tickets
         List<Ticket> tickets = new ArrayList<>();
-        tickets.add(new Ticket(1, showTime, 1, 1, 120, false));
-        tickets.add(new Ticket(2, showTime, 2, 1, 120, false));
-        tickets.add(new Ticket(3, showTime, 3, 1, 120, false));
+        tickets.add(new Ticket(1, showTime, 1, 1, 120, false, false));
+        tickets.add(new Ticket(2, showTime, 2, 1, 120, false, false));
+        tickets.add(new Ticket(3, showTime, 3, 1, 120, false, false));
 
         showTime.setTickets(tickets);
 
         showTimeRepository.save(showTime);
+        showTimeRepository.save(showTime2);
+        showTimeRepository.save(showTime3);
+        showTimeRepository.save(showTime4);
         System.out.println("showTime: " + showTime);
     }
 
