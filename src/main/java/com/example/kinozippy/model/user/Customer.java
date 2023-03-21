@@ -1,7 +1,6 @@
 package com.example.kinozippy.model.user;
 
 import com.example.kinozippy.model.Ticket;
-import com.example.kinozippy.model.enums.Role;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
@@ -22,13 +21,8 @@ public class Customer {
     @JsonProperty("password")
     private String password;
 
-    @Override
-    public String toString() {
-        return String.format("id: %s, username: %s", id, username);
-    }
-
     @OneToMany(mappedBy = "customer")
-    @JsonBackReference
+    @JsonIgnore
     private List<Ticket> tickets = new ArrayList<>();
 
     // constructors

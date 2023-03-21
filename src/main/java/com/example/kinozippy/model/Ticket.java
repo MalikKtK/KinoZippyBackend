@@ -12,12 +12,10 @@ public class Ticket {
     // Many tickets can be assigned to one showtime
     @ManyToOne()
     @JoinColumn(name = "showtime_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private ShowTime showTime;
 
     @ManyToOne()
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Customer customer;
 
     private int seatRow;
@@ -52,6 +50,14 @@ public class Ticket {
         this.id = id;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public ShowTime getShowTime() {
         return showTime;
     }
@@ -59,14 +65,6 @@ public class Ticket {
     public void setShowTime(ShowTime showTime) {
         this.showTime = showTime;
     }
-
-//    public Customer getCustomer() {
-//        return customer;
-//    }
-//
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
 
     public int getSeatRow() {
         return seatRow;

@@ -15,7 +15,6 @@ public class Employee {
     private String username;
     @JsonProperty("password")
     private String password;
-    @Column(name = "role")
     @JsonProperty("role")
     private Role role;
 
