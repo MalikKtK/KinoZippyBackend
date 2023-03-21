@@ -6,29 +6,57 @@ import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
 @Entity
-@DiscriminatorValue("employee")
-public class Employee extends User {
-
-
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @NonNull
+    @JsonProperty("username")
+    private String username;
+    @JsonProperty("password")
+    private String password;
     @Column(name = "role")
     @JsonProperty("role")
     private Role role;
 
     // constructors
     public Employee(long id, String username, String password, Role role) {
-        super(id, username, password);
         this.role = role;
     }
 
     public Employee() {
-        super();
+    }
+
+    // getter setter
+    public long getId() {
+        return id;
     }
 
     public void setRole(Role role) {
         this.role = role;
     }
+
     public Role getRole() {
         return role;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

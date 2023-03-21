@@ -1,8 +1,6 @@
 package com.example.kinozippy.service;
 
 import com.example.kinozippy.model.user.Customer;
-import com.example.kinozippy.model.user.Employee;
-import com.example.kinozippy.model.user.User;
 import com.example.kinozippy.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

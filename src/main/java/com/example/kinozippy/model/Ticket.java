@@ -1,5 +1,6 @@
 package com.example.kinozippy.model;
 
+import com.example.kinozippy.model.user.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
@@ -9,10 +10,16 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     // Many tickets can be assigned to one showtime
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "showtime_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "showtime_id", referencedColumnName = "id", nullable = false)
     @JsonBackReference
     private ShowTime showTime;
+
+    @ManyToOne()
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
+    private Customer customer;
+
     private int seatRow;
     private int seatNumber;
     private double price;
@@ -20,15 +27,18 @@ public class Ticket {
     private boolean attended;
 
     // ### constructors ###
-    public Ticket(long id, ShowTime ShowTime, int seatRow, int seatNumber, double price, boolean isPaid, boolean attended) {
+    public Ticket(long id, ShowTime ShowTime, Customer customer, int seatRow, int seatNumber, double price, boolean isPaid, boolean attended) {
         this.id = id;
         this.showTime = ShowTime;
+        this.customer = customer;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
         this.price = price;
         this.isPaid = isPaid;
         this.attended = attended;
     }
+
+
 
     public Ticket() {
     }
@@ -49,6 +59,14 @@ public class Ticket {
     public void setShowTime(ShowTime showTime) {
         this.showTime = showTime;
     }
+
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
     public int getSeatRow() {
         return seatRow;

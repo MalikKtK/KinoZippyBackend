@@ -1,7 +1,6 @@
 package com.example.kinozippy.service;
 
 import com.example.kinozippy.model.user.Employee;
-import com.example.kinozippy.model.user.User;
 import com.example.kinozippy.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +47,7 @@ public class EmployeeService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public User savedEmployee(Employee employee) {
+    public Employee savedEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
     private boolean doesEmployeeExists(Employee employee) {

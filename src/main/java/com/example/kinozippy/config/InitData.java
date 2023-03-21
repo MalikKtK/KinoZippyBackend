@@ -23,7 +23,7 @@ public class InitData implements CommandLineRunner {
     private final CustomerRepository customerRepository;
     private final MovieRepository movieRepository;
     private final ShowTimeRepository showTimeRepository;
-    private final ShopRepository shopRepository;
+    private final TicketRepository ticketRepository;
 
     @Autowired
     public InitData(TheaterRepository theaterRepository,
@@ -31,13 +31,13 @@ public class InitData implements CommandLineRunner {
                     CustomerRepository customerRepository,
                     MovieRepository movieRepository,
                     ShowTimeRepository showTimeRepository,
-                    ShopRepository shopRepository) {
+                    TicketRepository ticketRepository) {
         this.theaterRepository = theaterRepository;
         this.employeeRepository = employeeRepository;
         this.customerRepository = customerRepository;
         this.movieRepository = movieRepository;
         this.showTimeRepository = showTimeRepository;
-        this.shopRepository = shopRepository;
+        this.ticketRepository = ticketRepository;
     }
 
 
@@ -50,7 +50,7 @@ public class InitData implements CommandLineRunner {
         customer();
         movie();
         showTime();
-        shop();
+        tickets();
     }
 
     public void theater() {
@@ -66,40 +66,28 @@ public class InitData implements CommandLineRunner {
     }
 
     public void customer() {
-        customerRepository.save(new Customer(1, "c1", "123"));
-        customerRepository.save(new Customer(2, "c2", "123"));
-        customerRepository.save(new Customer(3, "c3", "123"));
+        customerRepository.save(new Customer(5, "c1", "123"));
+        customerRepository.save(new Customer(6, "c2", "123"));
+        customerRepository.save(new Customer(7, "c3", "123"));
     }
 
     public void movie() {
-        movieRepository.save(new Movie(1,"peter the can man", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null, 1));
+        movieRepository.save(new Movie(1, "peter the can man", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null, 1));
         movieRepository.save(new Movie(2, "the big movie", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110, null, 5));
-        movieRepository.save(new Movie(3,"the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130, null, 6));
+        movieRepository.save(new Movie(3, "the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130, null, 6));
     }
 
     public void showTime() {
-        ShowTime showTime = new ShowTime(1, 100, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
-        ShowTime showTime2 = new ShowTime(2, 110, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
-        ShowTime showTime3 = new ShowTime(3, 120, theaterRepository.getReferenceById(2L), movieRepository.getReferenceById(2L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
-        ShowTime showTime4 = new ShowTime(4, 130, theaterRepository.getReferenceById(2L), movieRepository.getReferenceById(2L), LocalDateTime.now(), LocalDateTime.now().plusHours(2), null);
-
-        // tickets
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.add(new Ticket(1, showTime, 1, 1, 120, false, false));
-        tickets.add(new Ticket(2, showTime, 2, 1, 120, false, false));
-        tickets.add(new Ticket(3, showTime, 3, 1, 120, false, false));
-
-        showTime.setTickets(tickets);
-
-        showTimeRepository.save(showTime);
-        showTimeRepository.save(showTime2);
-        showTimeRepository.save(showTime3);
-        showTimeRepository.save(showTime4);
-        System.out.println("showTime: " + showTime);
+        showTimeRepository.save(new ShowTime(1, 100, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
+        showTimeRepository.save(new ShowTime(2, 110, theaterRepository.getReferenceById(1L), movieRepository.getReferenceById(1L), LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
+        showTimeRepository.save(new ShowTime(3, 120, theaterRepository.getReferenceById(2L), movieRepository.getReferenceById(2L), LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
+        showTimeRepository.save(new ShowTime(4, 130, theaterRepository.getReferenceById(2L), movieRepository.getReferenceById(2L), LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
     }
-    public void shop () {
-        shopRepository.save(new Shop(1L, "shop1", 1, 5));
-        shopRepository.save(new Shop(2L, "shop2", 2, 5));
+
+    public void tickets() {
+        ticketRepository.save(new Ticket(1, showTimeRepository.getReferenceById(1L), customerRepository.getReferenceById(1L), 1, 1, 120, false, false));
+        ticketRepository.save(new Ticket(2, showTimeRepository.getReferenceById(1L), customerRepository.getReferenceById(1L), 2, 1, 120, true, true));
+        ticketRepository.save(new Ticket(3, showTimeRepository.getReferenceById(1L), customerRepository.getReferenceById(1L), 3, 1, 120, false, false));
     }
 
 }

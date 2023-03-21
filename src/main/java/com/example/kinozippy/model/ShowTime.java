@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 // specify a time for a given movie and theater
@@ -43,15 +44,14 @@ public class ShowTime {
 
     // ### constructors ###
     public ShowTime(long id, double price, Theater theater, Movie movie,
-                    LocalDateTime startTime, LocalDateTime endTime,
-                    List<Ticket> tickets) {
+                    LocalDateTime startTime, LocalDateTime endTime) {
         this.id = id;
         this.price = price;
         this.theater = theater;
         this.movie = movie;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>();
     }
 
     public ShowTime() {
