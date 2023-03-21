@@ -46,7 +46,7 @@ public class CustomerService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public User savedCustomer(Customer customer) {
+    public Customer savedCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
     private boolean doesCustomerExist(Customer customer) {

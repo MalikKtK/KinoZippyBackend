@@ -23,7 +23,6 @@ public class Employee {
     public Employee(long id, String username, String password, Role role) {
         this.role = role;
     }
-
     public Employee() {
     }
 
