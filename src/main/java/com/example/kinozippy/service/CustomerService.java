@@ -1,6 +1,7 @@
 package com.example.kinozippy.service;
 
 import com.example.kinozippy.model.user.Customer;
+import com.example.kinozippy.model.user.Employee;
 import com.example.kinozippy.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,13 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
+    public Customer login(String username, String password) {
+        Customer customer = customerRepository.findByUsernameAndPassword(username, password);
+        if (customer == null) {
+            throw new RuntimeException("Invalid username or password");
+        }
+        return customer;
+    }
     public ResponseEntity<Customer> postCustomer(Customer customer) {
         if (doesCustomerExist(customer)) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
