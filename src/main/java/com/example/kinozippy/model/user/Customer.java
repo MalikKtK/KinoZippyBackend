@@ -17,13 +17,13 @@ public class Customer {
     @NonNull
     @JsonProperty("username")
     private String username;
-    @NonNull
+
     @JsonProperty("password")
     private String password;
 
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
-    private List<Ticket> tickets = new ArrayList<>();
+    private final List<Ticket> tickets = new ArrayList<>();
 
     // constructors
     public Customer(long id, String username, String password) {
