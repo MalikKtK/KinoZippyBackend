@@ -15,6 +15,15 @@ import java.util.Optional;
 public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
+
+    public Employee login(String username, String password) {
+        Employee employee = employeeRepository.findByUsernameAndPassword(username, password);
+        if (employee == null) {
+            throw new RuntimeException("Invalid username or password");
+        }
+        return employee;
+    }
+
     public ResponseEntity<Employee> postEmployee(Employee employee) {
         if (doesEmployeeExists(employee)) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
