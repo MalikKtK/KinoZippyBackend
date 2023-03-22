@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -63,5 +64,9 @@ public class MovieService {
   private boolean doesMovieExist(Long id) {
     boolean isIdSet = id != null;
     return isIdSet && movieRepository.existsById(id);
+  }
+
+  public List<Map<String, Object>> movieSchedule() {
+    return movieRepository.movieSchedule();
   }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -75,8 +76,4 @@ public class TicketController {
         return ResponseEntity.ok(existingTicket);
     }
 
-//    @PutMapping("/movie/{id}")
-//    public ResponseEntity<Movie> putMovie(@PathVariable long id, @RequestBody Ticket movie) {
-//        return  ticketRepository.save(movie, id);
-//    }
 }

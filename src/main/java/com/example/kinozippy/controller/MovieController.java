@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -68,6 +69,10 @@ public class MovieController {
         return movieService.deleteMovie(id);
     }
 
+    @GetMapping("/movie_schedule")
+    public List<Map<String, Object>> movieSchedule() {
+        return movieService.movieSchedule();
+    }
 
 
 }
