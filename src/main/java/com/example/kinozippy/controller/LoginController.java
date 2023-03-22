@@ -20,14 +20,14 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    public String loginEmployee(@RequestParam String username, @RequestParam String password, HttpSession session) {
         Employee employee = employeeService.login(username, password);
         session.setAttribute("employee", employee);
         switch (employee.getRole()) {
             case MANAGER:
                 return "redirect:http://localhost:63342/KinoZippyFrontend/html/manager.html";
             case SHOP_ASSISTANT:
-                return "redirect:http://localhost:63342/KinoZippyFrontend/html/shop.html";
+                return "redirect:http://localhost:63342/KinoZippyFrontend/html/shopManager.html";
             case TICKET_INSPECTOR:
                 return "redirect:http://localhost:63342/KinoZippyFrontend/html/ticket.html";
             case OPERATOR:

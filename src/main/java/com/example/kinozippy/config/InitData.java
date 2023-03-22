@@ -56,7 +56,7 @@ public class InitData implements CommandLineRunner {
     }
 
     public void employee() {
-        employeeRepository.save(new Employee(1, "manager", "123", Role.MANAGER));
+        employeeRepository.save(new Employee(1, "malik", "123", Role.MANAGER));
         employeeRepository.save(new Employee(2, "operator", "123", Role.OPERATOR));
         employeeRepository.save(new Employee(3, "shop", "123", Role.SHOP_ASSISTANT));
         employeeRepository.save(new Employee(4, "ticket", "123", Role.TICKET_INSPECTOR));
