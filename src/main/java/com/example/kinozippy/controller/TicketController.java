@@ -1,5 +1,6 @@
 package com.example.kinozippy.controller;
 
+import com.example.kinozippy.model.Movie;
 import com.example.kinozippy.model.Ticket;
 import com.example.kinozippy.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,21 @@ public class TicketController {
             return ResponseEntity.notFound().build();
         }
 
-        ticketRepository.save(optionalTicket.get());
-        return ResponseEntity.ok(optionalTicket.get());
+        Ticket existingTicket = optionalTicket.get();
+        existingTicket.setShowTime(ticket.getShowTime());
+        existingTicket.setCustomer(ticket.getCustomer());
+        existingTicket.setSeatRow(ticket.getSeatRow());
+        existingTicket.setSeatNumber(ticket.getSeatNumber());
+        existingTicket.setPrice(ticket.getPrice());
+        existingTicket.setPaid(ticket.isPaid());
+        existingTicket.setAttended(ticket.isAttended());
+
+        ticketRepository.save(existingTicket);
+        return ResponseEntity.ok(existingTicket);
     }
+
+//    @PutMapping("/movie/{id}")
+//    public ResponseEntity<Movie> putMovie(@PathVariable long id, @RequestBody Ticket movie) {
+//        return  ticketRepository.save(movie, id);
+//    }
 }
