@@ -23,8 +23,8 @@ public class LoginController {
         return "login"; // returns the login page HTML template
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    @PostMapping("/employeeLogin")
+    public String employeeLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
         // check if the user is an employee
         Employee employee = employeeService.login(username, password);
         if (employee != null) {
@@ -41,7 +41,13 @@ public class LoginController {
                 default:
                     return "redirect:http://localhost:63342/KinoZippyFrontend/html/login.html";
             }
-        }
+    }
+return "redirect:http://localhost:63342/KinoZippyFrontend/html/login.html";
+    }
+    @PostMapping("/customerLogin")
+    public String customerLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
+        // check if the user is an employee
+
         Customer customer = customerService.login(username, password);
         if (customer != null) {
             session.setAttribute("customer", customer);
