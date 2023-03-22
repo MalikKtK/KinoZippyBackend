@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(value = "*")
@@ -53,5 +54,14 @@ public class TicketController {
         return ResponseEntity.ok().build();
     }
 
-    //
+    @PutMapping("/tickets/{id}")
+    public ResponseEntity<Ticket> updateTicket(@PathVariable Long id, @RequestBody Ticket ticket) {
+        Optional<Ticket> optionalTicket = ticketRepository.findById(id);
+        if (optionalTicket.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ticketRepository.save(optionalTicket.get());
+        return ResponseEntity.ok(optionalTicket.get());
+    }
 }
