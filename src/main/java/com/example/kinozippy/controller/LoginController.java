@@ -33,7 +33,7 @@ public class LoginController {
             case OPERATOR:
                 return "redirect:http://localhost:63342/KinoZippyFrontend/html/operator.html";
             default:
-                throw new RuntimeException("Invalid role");
+                return "redirect:http://localhost:63342/KinoZippyFrontend/html/login.html";
         }
     }
     @PostMapping("/logout")
