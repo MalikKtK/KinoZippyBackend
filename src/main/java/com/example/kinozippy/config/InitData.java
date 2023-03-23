@@ -21,6 +21,7 @@ public class InitData implements CommandLineRunner {
     private final MovieRepository movieRepository;
     private final ShowTimeRepository showTimeRepository;
     private final TicketRepository ticketRepository;
+    private final ShopRepository shopRepository;
 
     @Autowired
     public InitData(TheaterRepository theaterRepository,
@@ -28,12 +29,15 @@ public class InitData implements CommandLineRunner {
                     CustomerRepository customerRepository,
                     MovieRepository movieRepository,
                     ShowTimeRepository showTimeRepository,
-                    TicketRepository ticketRepository) {
+                    TicketRepository ticketRepository,
+                    ShopRepository shopRepository) {
         this.theaterRepository = theaterRepository;
         this.employeeRepository = employeeRepository;
         this.customerRepository = customerRepository;
         this.movieRepository = movieRepository;
         this.ticketRepository = ticketRepository;
+        this.showTimeRepository = showTimeRepository;
+        this.shopRepository = shopRepository;
     }
 
 
@@ -56,7 +60,7 @@ public class InitData implements CommandLineRunner {
     }
 
     public void employee() {
-        employeeRepository.save(new Employee(1, "malik", "123", Role.MANAGER));
+        employeeRepository.save(new Employee(1, "manager", "123", Role.MANAGER));
         employeeRepository.save(new Employee(2, "operator", "123", Role.OPERATOR));
         employeeRepository.save(new Employee(3, "shop", "123", Role.SHOP_ASSISTANT));
         employeeRepository.save(new Employee(4, "ticket", "123", Role.TICKET_INSPECTOR));
