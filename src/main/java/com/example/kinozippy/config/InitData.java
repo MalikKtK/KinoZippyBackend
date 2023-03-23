@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Component
 public class InitData implements CommandLineRunner {
     // ### run tests ###
-    private final boolean runTests = true;
+    private final boolean runTests = false;
     // ### repositories ###
     private final TheaterRepository theaterRepository;
     private final EmployeeRepository employeeRepository;
@@ -33,7 +33,6 @@ public class InitData implements CommandLineRunner {
         this.employeeRepository = employeeRepository;
         this.customerRepository = customerRepository;
         this.movieRepository = movieRepository;
-        this.showTimeRepository = showTimeRepository;
         this.ticketRepository = ticketRepository;
     }
 
@@ -48,6 +47,7 @@ public class InitData implements CommandLineRunner {
         movie();
         showTime();
         tickets();
+        shop();
     }
 
     public void theater() {
@@ -63,9 +63,10 @@ public class InitData implements CommandLineRunner {
     }
 
     public void customer() {
-        customerRepository.save(new Customer(5, "c1", "123"));
-        customerRepository.save(new Customer(6, "c2", "123"));
-        customerRepository.save(new Customer(7, "c3", "123"));
+        customerRepository.save(new Customer(5, "malik", "123"));
+        customerRepository.save(new Customer(6, "mark", "123"));
+        customerRepository.save(new Customer(7, "ebus", "123"));
+        customerRepository.save(new Customer(7, "daniel", "123"));
     }
 
     public void movie() {
@@ -85,6 +86,17 @@ public class InitData implements CommandLineRunner {
         ticketRepository.save(new Ticket(1, showTimeRepository.getReferenceById(1L), customerRepository.getReferenceById(1L), 1, 1, 120, false, false));
         ticketRepository.save(new Ticket(2, showTimeRepository.getReferenceById(1L), customerRepository.getReferenceById(1L), 2, 1, 120, true, true));
         ticketRepository.save(new Ticket(3, showTimeRepository.getReferenceById(1L), customerRepository.getReferenceById(1L), 3, 1, 120, false, false));
+    }
+
+    private void shop() {
+        shopRepository.save(new Shop(1L, "Popcorn Small", 25, 30));
+        shopRepository.save(new Shop(2L, "Popcorn Medium", 25, 30));
+        shopRepository.save(new Shop(3L, "Popcorn Huge", 25, 30));
+        shopRepository.save(new Shop(4L, "chocolate", 25, 30));
+        shopRepository.save(new Shop(5L, "Cola Small", 25, 30));
+        shopRepository.save(new Shop(6L, "Cola Medium", 25, 30));
+        shopRepository.save(new Shop(7L, "Cola Large", 25, 30));
+                // Long id, String name, int price, int quantity
     }
 
 }

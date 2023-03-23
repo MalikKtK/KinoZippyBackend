@@ -20,8 +20,12 @@ public class Employee {
 
     // constructors
     public Employee(long id, String username, String password, Role role) {
+        this.id = id;
         this.role = role;
+        this.password = password;
+        this.username = username;
     }
+
     public Employee() {
     }
 
