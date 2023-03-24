@@ -25,7 +25,7 @@ public class ShopController {
   }
 
   @GetMapping("/shops")
-  public List<Shop> getMovies() {
+  public List<Shop> getItems() {
     return shopService.getShop();
   }
 
@@ -35,9 +35,17 @@ public class ShopController {
   }
 
   @PutMapping("/shop/{id}")
-  public ResponseEntity<Shop> putMovie(@PathVariable long id, @RequestBody Shop shop) {
+  public ResponseEntity<Shop> putItem(@PathVariable long id, @RequestBody Shop shop) {
     return shopService.putShop(shop, id);
   }
+
+  // put multiple items
+    @PutMapping("/shop")
+    public ResponseEntity<Shop> putItems(@RequestBody List<Shop> shops) {
+        return shopService.putShops(shops);
+    }
+
+
 
   @DeleteMapping("/shop/{id}")
   public ResponseEntity<Shop> deleteShop(@PathVariable long id) {
