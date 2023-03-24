@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Component
 public class InitData implements CommandLineRunner {
     // ### run tests ###
-    private final boolean runTests = true;
+    private final boolean runTests = false;
     // ### repositories ###
     private final TheaterRepository theaterRepository;
     private final EmployeeRepository employeeRepository;
@@ -74,9 +74,9 @@ public class InitData implements CommandLineRunner {
     }
 
     public void movie() {
-        movieRepository.save(new Movie(1, "peter the can man", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null, 1));
-        movieRepository.save(new Movie(2, "the big movie", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110, null, 5));
-        movieRepository.save(new Movie(3, "the boring movie", AgeLimit.RESTRICTED, Category.DRAMA, 130, null, 6));
+        movieRepository.save(new Movie(1, "PETER THE CAN MAN", AgeLimit.ADULTS_ONLY, Category.ACTION, 120, null, 1));
+        movieRepository.save(new Movie(2, "THE BIG MOVIE", AgeLimit.PARENTAL_GUIDANCE_SUGGESTED, Category.COMEDY, 110, null, 5));
+        movieRepository.save(new Movie(3, "THE BORING MOVIE", AgeLimit.RESTRICTED, Category.DRAMA, 130, null, 6));
     }
 
     public void showTime() {
