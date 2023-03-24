@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Component
 public class InitData implements CommandLineRunner {
     // ### run tests ###
-    private final boolean runTests = true;
+    private final boolean runTests = false;
     // ### repositories ###
     private final TheaterRepository theaterRepository;
     private final EmployeeRepository employeeRepository;
