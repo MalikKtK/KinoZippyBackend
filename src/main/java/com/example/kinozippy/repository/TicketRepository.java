@@ -16,12 +16,18 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     // ticket statistics
     @Query(value = """
             SELECT sold.showtime_id,
+                   sold.movie_title,
+                   sold.theater_name,
                    sold.tickets_sold,
                    attended.tickets_attended
             FROM (SELECT show_time.id                  AS showtime_id,
-                         COALESCE(COUNT(ticket.id), 0) AS tickets_sold
+                         COALESCE(COUNT(ticket.id), 0) AS tickets_sold,
+                         m.title                       AS movie_title,
+                         t.name                        AS theater_name
                   FROM show_time
                            LEFT JOIN ticket ON show_time.id = ticket.showtime_id
+                           LEFT JOIN movies m on show_time.movie_id = m.movie_id
+                           LEFT JOIN theater t on show_time.theater_id = t.id
                   GROUP BY show_time.id) AS sold
                      LEFT JOIN (SELECT show_time.id                                                            AS showtime_id,
                                        COALESCE(COUNT(CASE WHEN ticket.attended = true THEN ticket.id END), 0) AS tickets_attended
