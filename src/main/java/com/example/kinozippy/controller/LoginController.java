@@ -47,9 +47,4 @@ public class LoginController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:http://localhost:63342/KinoZippyFrontend/html/login.html";
-    }
 }
