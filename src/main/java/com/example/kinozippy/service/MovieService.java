@@ -69,9 +69,6 @@ public class MovieService {
   public List<Map<String, Object>> movieSchedule() {
     return movieRepository.movieSchedule();
   }
-  
-  public List<Map<String, Object>> ticketsSoldReport() {
-    return movieRepository.ticketsSoldReport();
-  }
+
 
 }

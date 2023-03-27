@@ -2,6 +2,7 @@ package com.example.kinozippy.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -17,9 +18,11 @@ public class ShowTime {
     // Many showTimes relate to one theater
     @ManyToOne
     @JoinColumn(name = "theater_id", referencedColumnName = "id")
+    @JsonProperty("theater")
     private Theater theater;
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+    @JsonProperty("movie")
     private Movie movie;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -48,6 +51,17 @@ public class ShowTime {
         this.endTime = endTime;
         this.tickets = new ArrayList<>();
     }
+    public ShowTime(double price, Theater theater, Movie movie,
+                    LocalDateTime startTime, LocalDateTime endTime) {
+        this.price = price;
+        this.theater = theater;
+        this.movie = movie;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.tickets = new ArrayList<>();
+    }
+
+
 
     public ShowTime() {
     }

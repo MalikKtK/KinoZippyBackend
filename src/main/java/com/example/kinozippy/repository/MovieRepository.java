@@ -32,14 +32,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             GROUP BY show_time.id""", nativeQuery = true)
     List<Map<String, Object>> movieSchedule();
 
-    // Generate a report on tickets sold for each showtime
-    @Query(value = """
-            SELECT show_time.id AS showtime_id,
-                   COALESCE(COUNT(ticket.id), 0) AS tickets_sold
-            FROM show_time
-                     LEFT JOIN ticket ON show_time.id = ticket.showtime_id
-            GROUP BY show_time.id""", nativeQuery = true)
-    List<Map<String, Object>> ticketsSoldReport();
 
 }
 
