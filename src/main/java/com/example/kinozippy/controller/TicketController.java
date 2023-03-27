@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -96,6 +97,11 @@ public class TicketController {
 
         ticketRepository.save(existingTicket);
         return ResponseEntity.ok(existingTicket);
+    }
+
+    @GetMapping("/tickets/sales")
+    public List<Map<String, Object>> getTicketSales() {
+        return ticketRepository.ticketSales();
     }
 
 }
